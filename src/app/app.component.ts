@@ -7,17 +7,24 @@ import { RouterModule } from '@angular/router';
   template: `
     <main>
       <a [routerLink]="['/']">
-        <header class="brand-name">
-          <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true">
+        <header >
+          <img src="/assets/logo.svg" alt="logo" aria-hidden="true">
         </header>
       </a>
       <section class="content">
         <router-outlet></router-outlet>
       </section>
+      <footer>
+        <div class="disclaimer">
+          Esta pagina es puramente ilustrativa. Todas las imagenes, logotipos e informacion pertenecen a
+          sus respectivas marcas y firmas. Esta pagina no usa trackers, anuncios ni ningun tipo de 
+          telemetria que permita generar ingresos.
+        </div>
+      </footer>
     </main>
   `,
   standalone: true,
-  imports: [ HomeComponent, RouterModule ],
+  imports: [HomeComponent, RouterModule],
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {

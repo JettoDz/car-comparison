@@ -11,9 +11,9 @@ import { RouterModule } from '@angular/router';
       <section class="listing">
         <img class="listing-photo" [src]="car.photo" alt="Exterior photo of {{car.model}}">
         <h2 class="listing-heading">{{ car.make }}</h2>
-        <h3>{{ car.model }}</h3>
-        <p class="listing-location">\${{car.price }}</p>
-        <a [routerLink]="['/details', car.id]">Ver mas</a>
+        <h3>{{ car.model }} {{car.year}}</h3>
+        <p class="listing-location">\${{car.minPrice()}}</p>
+        <a [routerLink]="['/details', car._id]">Ver mas</a>
       </section>
     `,
   styleUrls: ['./car-card.component.sass']

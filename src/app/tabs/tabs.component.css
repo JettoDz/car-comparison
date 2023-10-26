@@ -1,0 +1,94 @@
+.trims-list {
+  max-width: 49%;
+  height: 100%;
+
+  .index {
+    display: flex;
+
+    * {
+      border: 1px solid #ccc;
+      background: #EEE;
+      padding: 4px 12px;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      top: 1px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .active {
+      background: #FFF;
+      border-bottom: 1px solid transparent;
+    }
+  }
+
+  .trim-details {
+    border: 1px solid #ccc;
+    min-height: 120px;
+    padding: 12px;
+
+    .specs {
+      width: 100%;
+      text-align: center;
+      border-collapse: separate;
+      border-spacing: 0 4px;
+
+      >tr>td {
+        padding: 0.5em;
+      }
+
+      .spec-key {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        width: 50%;
+        vertical-align: middle;
+        background-color: #ddd;
+        font-weight: bold;
+      }
+
+      .spec-value {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+
+.info-element {
+  position: relative;
+  cursor: pointer;
+}
+
+.floating-note {
+  width: 420px;
+  border-radius: 4px;
+  position: absolute;
+  top: 1.5rem;
+  left: -155px;
+  border: thin solid #ddd;
+  background-color: #eff;
+  z-index: 9999;
+
+  .note-text {
+    cursor: pointer;
+    text-align: center;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: small;
+    font-style: italic;
+  }
+}

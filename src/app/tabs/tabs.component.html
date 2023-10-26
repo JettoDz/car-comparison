@@ -1,0 +1,65 @@
+<div class="trims-list">
+    <div class="index">
+        <div *ngFor="let trim of trimsArray; index as i" tabindex="{{i}}" role="tab" 
+            (click)="selectTab(i)" [ngClass]="{active: tab==i}">
+            {{trim.trim}}
+        </div>
+    </div>
+    <div class="trim-details">
+        <div *ngIf="selectedTrim !== undefined">
+            <table class="specs">
+                <tr>
+                    <td class="spec-key">Precio inicial</td>
+                    <td class="spec-value">${{selectedTrim.starting_price.toLocaleString('en-us', {minimumFractionDigits: 2})}}</td>
+                </tr>
+                <tr>
+                    <td class="spec-key">Motor</td>
+                    <td class="spec-value">{{selectedTrim.engine}}</td>
+                </tr>
+                <tr>
+                    <td class="spec-key">Transmision</td>
+                    <td class="spec-value">{{selectedTrim.transmition}}</td>
+                </tr>
+                <tr>
+                    <td class="spec-key">Suspension</td>
+                    <td class="spec-value">{{selectedTrim.suspension}}</td>
+                </tr>
+                <tr *ngIf="selectedTrim.drive && selectedTrim.drive != ''">
+                    <td class="spec-key">Traccion</td>
+                    <td class="spec-value">{{selectedTrim.drive}}</td>
+                </tr>
+                <tr>
+                    <td class="spec-key">Dimensiones (Largo/Ancho/Alto)</td>
+                    <td class="spec-value">
+                        {{selectedTrim.length}}/{{selectedTrim.width}}/{{selectedTrim.height}} mm
+                        <span *ngIf="selectedTrim.dimentions_note" class="info-element"
+                            (click)="toggleNote(dimentionsnote, selectedTrim.dimentions_note)">
+                            ℹ️
+                            <div id="dimentionsnote" #dimentionsnote class="hide floating-note">
+                                <div class="note-text"></div>
+                            </div>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="spec-key">Autonomia (Ciudad, Carretera, Combinado)</td>
+                    <td class="spec-value">
+                        {{selectedTrim.autonomy}} Km/L 
+                        <span *ngIf="selectedTrim.autonomy_note" style="position: relative;" 
+                            (click)="toggleNote(autonomynote, selectedTrim.autonomy_note)">
+                            ℹ️
+                            <div id="autonomynote" #autonomynote class="hide floating-note">
+                                <div class="note-text"></div>
+                            </div>
+                        </span>
+                    </td>
+                </tr>
+                <tr *ngIf="selectedTrim.driving_modes">
+                    <td class="spec-key">Modos de manejo</td>
+                    <td class="spec-value">{{selectedTrim.driving_modes}}</td>
+                </tr>
+            </table>
+        </div>
+        <div *ngIf="selectedTrim == undefined">Seleccione una version</div>
+    </div>
+</div>

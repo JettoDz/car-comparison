@@ -25,15 +25,22 @@ import { FetcherService } from '../fetcher.service';
 })
 export class HomeComponent {
 
-  readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
+  readonly photoUrl = 'https://angular.io/assets/images/tutorials/faa/example-house.jpg';
 
   cars: Car[] = []
   filteredCars: Car[] = []
   fetcher: FetcherService = inject(FetcherService)
 
   constructor() {
-    this.cars = this.fetcher.getAllCars()
-    this.filteredCars = this.cars;
+
+    this.fetcher.getAll().then(data => {
+      this.cars = data
+      this.cars.forEach(car => {
+        car.minPrice = () => Math.min(...(car.trims.map(trim => trim.starting_price)))
+        car.photo = this.photoUrl
+      })
+      this.filteredCars = this.cars
+    })
   }
 
   filterResults(value: String) {

@@ -10,43 +10,55 @@ export class FetcherService {
 
   cars: Car[] = [
     {
-      id: 1,
+      _id: '1',
       make: 'Mazda',
       model: 'CX-5',
-      price: 580000,
+      year: 999,
+      trims: [],
+      minPrice: () => 10,
       photo: `${this.baseUrl}/example-house.jpg`
     },
     {
-      id: 2,
+      _id: '2',
       make: 'Toyota',
       model: 'RAV4',
-      price: 550000,
+      year: 999,
+      trims: [],
+      minPrice: () => 10,
       photo: `${this.baseUrl}/example-house.jpg`
     },
     {
-      id: 3,
+      _id: '3',
       make: 'Ford',
       model: 'Territory',
-      price: 515000,
+      year: 999,
+      trims: [],
+      minPrice: () => 10,
       photo: `${this.baseUrl}/example-house.jpg`
     },
     {
-      id: 4,
+      _id: '4',
       make: 'Hyundai',
       model: 'Creta',
-      price: 440000,
+      year: 999,
+      trims: [],
+      minPrice: () => 10,
       photo: `${this.baseUrl}/example-house.jpg`
     }
   ];
 
   constructor() { }
 
-  getAllCars(): Car[] {
-    return this.cars;
+  async getAll(): Promise<Car[]> {
+    return (await fetch('http://localhost:3000/v1/all', {mode: 'cors'})).json() ?? []
   }
 
-  getCarById(id: number): Car | undefined {
-    return this.cars.find(car => car.id === id);
+  getCarById(id: string): Car | undefined {
+    return this.cars.find(car => car._id === id);
+  }
+
+  async getCarById2(id: String): Promise<Car> {
+    return (await fetch(`http://localhost:3000/v1/details/${id}`, {mode: 'cors'})).json() ?? {}
   }
 
 }

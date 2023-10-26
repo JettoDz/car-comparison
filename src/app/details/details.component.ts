@@ -3,25 +3,23 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FetcherService } from '../fetcher.service';
 import { Car } from '../car';
+import { TabsComponent } from '../tabs/tabs.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TabsComponent],
   template: `
     <article>
       <img class="listing-photo" [src]="car?.photo"
         alt="Exterior photo of {{car?.model}}"/>
       <section class="listing-description">
-        <h2 class="listing-heading">{{car?.model}}</h2>
-        <p class="listing-location"></p>
+        <p class="listing-heading">{{car?.make}} {{car?.model}}</p>
+        <p class="listing-location">Modelo: {{car?.year}}</p>
       </section>
       <section class="listing-features">
-        <h2 class="section-heading">Acerca del vehiculo</h2>
-        <ul>
-          <li>Marca: {{car?.make}}</li>
-          <li>Precio inicial: {{car?.price}}</li>
-        </ul>
+        <h4 class="section-heading">Acerca del vehiculo</h4>
+        <app-tabs [trimsArray]="car?.trims"></app-tabs>
       </section>
     </article>
   `,
@@ -32,7 +30,12 @@ export class DetailsComponent {
   fetcher: FetcherService = inject(FetcherService)
   car: Car | undefined;
   constructor() {
-    let id = Number(this.route.snapshot.params['id'])
-    this.car = this.fetcher.getCarById(id)
+    let id = this.route.snapshot.params['id']
+    this.fetcher.getCarById2(id).then(car => {
+      this.car = car
+      this.car.minPrice = () => Math.min(...(car.trims.map(trim => trim.starting_price)))
+      this.car.photo = 'https://angular.io/assets/images/tutorials/faa/example-house.jpg'
+    })
   }
+  
 }
